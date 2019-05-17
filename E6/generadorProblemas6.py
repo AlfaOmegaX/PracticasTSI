@@ -99,6 +99,7 @@ for linea in pJugadores:
 # :goal
 mGoal += "(>= (puntosTotales) " + pTotales + ")))\n"
 mInit[5] += "\t\t\t\t(= (puntosTotales) 0)\n"
+mInit[5] += "\t\t\t\t(= (distanciaTotal) 0)\n"
 
 # Por cada linea leemos las conexiones
 for linea in sinSaltos:
