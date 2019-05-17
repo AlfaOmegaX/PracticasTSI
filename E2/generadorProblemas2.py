@@ -6,7 +6,7 @@ import random
 # Random seed pero siempre la misma
 random.seed(100)
 # Lista de items
-lItems = [ [], [], [], [], [], [], [], [], [], [], [], [] ]
+lItems = [[], [], [], [], [], [], [], [], [], [], [], []]
 # Texto del programa
 mGeneral = "(define "
 mProblem = "(problem "
@@ -44,7 +44,7 @@ def clasificar(zona, item):
     lItems[ind].append(nombreItem)
     # Si es el jugador se añade el predicado de orientación
     if tipoItem == "Player":
-        mInit[1] += "\t\t\t\t(orientadoHacia " + nombreItem + " N)\n"
+        mInit[1] += "\t\t\t\t(orientadoN" + " " + nombreItem + ")\n"
         mInit[4] += "\t\t\t\t(= (distanciaTotal " + nombreItem + ") 0)\n"
 
 if len(sys.argv) != 2:
@@ -114,8 +114,8 @@ for linea in sinSaltos:
             o1 = "E"
             o2 = "O"
         # Si están conectadas lo están en un sentido y en el otro
-        mInit[3] += "\t\t\t\t(estanConectadas " + conexion[i] + " " + conexion[i + 1] + " " + o1 + ")\n"
-        mInit[3] += "\t\t\t\t(estanConectadas " + conexion[i + 1] + " " + conexion[i] + " " + o2 + ")\n"
+        mInit[3] += "\t\t\t\t(conectadas" + o1 + " " + conexion[i] + " " + conexion[i + 1] + ")\n"
+        mInit[3] += "\t\t\t\t(conectadas" + o2 + " " + conexion[i + 1] + " " + conexion[i] + ")\n"
         # Añado las distancias
         mInit[5] += "\t\t\t\t(= (distanciaZona " + conexion[i] + " " + conexion[i + 1] + ") " + distancias[i] + ")\n"
         mInit[5] += "\t\t\t\t(= (distanciaZona " + conexion[i + 1] + " " + conexion[i] + ") " + distancias[i] + ")\n"

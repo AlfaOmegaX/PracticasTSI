@@ -1,6 +1,6 @@
-Dominio:Ejercicio2
+Dominio:Ejercicio1
 
-Problema:Problema2
+Problema:Problema1
 
 numero de zonas:25
 

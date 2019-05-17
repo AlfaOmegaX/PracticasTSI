@@ -45,7 +45,7 @@ def clasificar(zona, nombreItem, tipoItem):
         mInit[4] += "\t\t\t\t(estaEn " + nombreItem + " " + zona + ")\n"
     # Si es el jugador se añade el predicado de orientación
     if tipoItem == "Player":
-        mInit[1] += "\t\t\t\t(orientadoHacia " + nombreItem + " N)\n"
+        mInit[1] += "\t\t\t\t(orientadoN" + " " + nombreItem + ")\n"
         mInit[6] += "\t\t\t\t(= (distanciaTotal " + nombreItem + ") 0)\n"
     # Si es un tipo especial que necesita predicado de es algo
     elif tipoItem in ["Agua", "Bosque", "Bikini", "Zapatilla"]:
@@ -124,8 +124,8 @@ for linea in sinSaltos:
             o1 = "E"
             o2 = "O"
         # Si están conectadas lo están en un sentido y en el otro
-        mInit[5] += "\t\t\t\t(estanConectadas " + conexion[i] + " " + conexion[i + 1] + " " + o1 + ")\n"
-        mInit[5] += "\t\t\t\t(estanConectadas " + conexion[i + 1] + " " + conexion[i] + " " + o2 + ")\n"
+        mInit[5] += "\t\t\t\t(conectadas" + o1 + " " + conexion[i] + " " + conexion[i + 1] + ")\n"
+        mInit[5] += "\t\t\t\t(conectadas" + o2 + " " + conexion[i + 1] + " " + conexion[i] + ")\n"
         # Añado las distancias
         mInit[7] += "\t\t\t\t(= (distanciaZona " + conexion[i] + " " + conexion[i + 1] + ") " + distancias[i] + ")\n"
         mInit[7] += "\t\t\t\t(= (distanciaZona " + conexion[i + 1] + " " + conexion[i] + ") " + distancias[i] + ")\n"
