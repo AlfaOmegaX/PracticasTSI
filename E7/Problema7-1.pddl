@@ -75,6 +75,7 @@
 
 				(= (puntosJugador player1) 0)
 				(= (puntosTotales) 0)
+				(= (distanciaTotal) 0)
 				(= (distanciaJugador player1) 0)
 				(= (distanciaJugador player2) 0)
 
