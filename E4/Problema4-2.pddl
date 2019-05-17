@@ -1,5 +1,5 @@
-(define (problem Problema2)
-		(:domain Ejercicio2)
+(define (problem Problema4)
+		(:domain Ejercicio4)
 
 		(:objects
 				jugador1 - Player
@@ -10,26 +10,56 @@
 				leonardo1 - Leonardo
 				manzana1 - Manzana
 				oscar1 - Oscar
-				algoritmo1 - Algoritmo
-				oro1 - Oro
-				rosa1 - Rosa
-				z1 z10 z11 z12 z13 z14 z15 z16 z17 z18 z19 z2 z20 z21 z22 z23 z24 z25 z3 z4 z5 z6 z7 z8 z9 - Zona
+				algoritmo1 algoritmo2 - Algoritmo
+				oro1 oro2 oro3 oro4 - Oro
+				rosa1 rosa2 - Rosa
+				zapatilla1 - Zapatilla
+				bikini1 - Bikini
+				z1 z2 z3 z6 z8 z11 z25 - Bosque
+				z7 z9 z12 z22 z23 z24 - Agua
+				z14 - Precipicio
+				z4 z5 z10 z13 z20 - Arena
+				z15 z16 z17 z18 z19 z21 - Piedra
 		)
 
 		(:init
 				(= (orientado jugador1) 0)
 
+				(esBosque z1)
+				(esBosque z2)
+				(esBikini bikini1)
+				(esBosque z3)
+				(esZapatilla zapatilla1)
+				(esAgua z7)
+				(esBosque z8)
+				(esAgua z9)
+				(esBosque z11)
+				(esAgua z12)
+				(esPrecipicio z14)
+				(esAgua z22)
+				(esAgua z23)
+				(esAgua z24)
+				(esBosque z6)
+				(esBosque z25)
+
+				(estaEn bikini1 z3)
+				(estaEn zapatilla1 z4)
+				(estaEn rosa2 z7)
 				(estaEn princesa1 z7)
+				(estaEn oro2 z8)
+				(estaEn oro3 z8)
+				(estaEn oro4 z8)
 				(estaEn principe1 z8)
 				(estaEn leonardo1 z9)
 				(estaEn oscar1 z9)
 				(estaEn rosa1 z12)
 				(estaEn bruja1 z12)
-				(estaEn oro1 z13)
 				(estaEn jugador1 z13)
 				(estaEn algoritmo1 z14)
 				(estaEn profesor1 z18)
 				(estaEn manzana1 z18)
+				(estaEn oro1 z24)
+				(estaEn algoritmo2 z25)
 
 				(= (conectadas z1 z2) 1)
 				(= (conectadas z2 z1) 3)
@@ -90,6 +120,7 @@
 				(= (conectadas z20 z25) 2)
 				(= (conectadas z25 z20) 0)
 
+				(= (puntosJugador jugador1) 0)
 				(= (distanciaTotal jugador1) 0)
 
 				(= (distanciaZona z1 z2) 10)
@@ -150,9 +181,60 @@
 				(= (distanciaZona z20 z15) 30)
 				(= (distanciaZona z20 z25) 30)
 				(= (distanciaZona z25 z20) 30)
+
+				(= (daPuntos profesor1 manzana1) 5)
+				(= (daPuntos profesor1 oscar1) 3)
+				(= (daPuntos profesor1 algoritmo1) 10)
+				(= (daPuntos profesor1 algoritmo2) 10)
+				(= (daPuntos profesor1 oro1) 1)
+				(= (daPuntos profesor1 oro2) 1)
+				(= (daPuntos profesor1 oro3) 1)
+				(= (daPuntos profesor1 oro4) 1)
+				(= (daPuntos profesor1 rosa1) 4)
+				(= (daPuntos profesor1 rosa2) 4)
+				(= (daPuntos principe1 manzana1) 4)
+				(= (daPuntos principe1 oscar1) 1)
+				(= (daPuntos principe1 algoritmo1) 5)
+				(= (daPuntos principe1 algoritmo2) 5)
+				(= (daPuntos principe1 oro1) 10)
+				(= (daPuntos principe1 oro2) 10)
+				(= (daPuntos principe1 oro3) 10)
+				(= (daPuntos principe1 oro4) 10)
+				(= (daPuntos principe1 rosa1) 3)
+				(= (daPuntos principe1 rosa2) 3)
+				(= (daPuntos princesa1 manzana1) 1)
+				(= (daPuntos princesa1 oscar1) 5)
+				(= (daPuntos princesa1 algoritmo1) 3)
+				(= (daPuntos princesa1 algoritmo2) 3)
+				(= (daPuntos princesa1 oro1) 4)
+				(= (daPuntos princesa1 oro2) 4)
+				(= (daPuntos princesa1 oro3) 4)
+				(= (daPuntos princesa1 oro4) 4)
+				(= (daPuntos princesa1 rosa1) 10)
+				(= (daPuntos princesa1 rosa2) 10)
+				(= (daPuntos bruja1 manzana1) 10)
+				(= (daPuntos bruja1 oscar1) 4)
+				(= (daPuntos bruja1 algoritmo1) 1)
+				(= (daPuntos bruja1 algoritmo2) 1)
+				(= (daPuntos bruja1 oro1) 3)
+				(= (daPuntos bruja1 oro2) 3)
+				(= (daPuntos bruja1 oro3) 3)
+				(= (daPuntos bruja1 oro4) 3)
+				(= (daPuntos bruja1 rosa1) 5)
+				(= (daPuntos bruja1 rosa2) 5)
+				(= (daPuntos leonardo1 manzana1) 3)
+				(= (daPuntos leonardo1 oscar1) 10)
+				(= (daPuntos leonardo1 algoritmo1) 4)
+				(= (daPuntos leonardo1 algoritmo2) 4)
+				(= (daPuntos leonardo1 oro1) 4)
+				(= (daPuntos leonardo1 oro2) 4)
+				(= (daPuntos leonardo1 oro3) 4)
+				(= (daPuntos leonardo1 oro4) 4)
+				(= (daPuntos leonardo1 rosa1) 1)
+				(= (daPuntos leonardo1 rosa2) 1)
 		)
 
-		(:goal (and (tiene profesor1 oscar1) (tiene principe1 rosa1) (tiene princesa1 algoritmo1) (tiene bruja1 manzana1) (tiene leonardo1 oro1)))
+		(:goal (and (>= (puntosJugador jugador1) 50)))
 
 		(:metric minimize (distanciaTotal jugador1))
 )

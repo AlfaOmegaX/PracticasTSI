@@ -1,5 +1,5 @@
-(define (problem Problema2)
-		(:domain Ejercicio2)
+(define (problem Problema3)
+		(:domain Ejercicio3)
 
 		(:objects
 				jugador1 - Player
@@ -10,26 +10,52 @@
 				leonardo1 - Leonardo
 				manzana1 - Manzana
 				oscar1 - Oscar
-				algoritmo1 - Algoritmo
+				algoritmo1 algoritmo2 - Algoritmo
 				oro1 - Oro
 				rosa1 - Rosa
-				z1 z10 z11 z12 z13 z14 z15 z16 z17 z18 z19 z2 z20 z21 z22 z23 z24 z25 z3 z4 z5 z6 z7 z8 z9 - Zona
+				zapatilla1 - Zapatilla
+				bikini1 - Bikini
+				z1 z2 z3 z6 z8 z11 z25 - Bosque
+				z7 z9 z12 z22 z23 z24 - Agua
+				z14 - Precipicio
+				z4 z5 z10 z13 z20 - Arena
+				z15 z16 z17 z18 z19 z21 - Piedra
 		)
 
 		(:init
 				(= (orientado jugador1) 0)
 
+				(esBosque z1)
+				(esBosque z2)
+				(esBikini bikini1)
+				(esBosque z3)
+				(esZapatilla zapatilla1)
+				(esAgua z7)
+				(esBosque z8)
+				(esAgua z9)
+				(esBosque z11)
+				(esAgua z12)
+				(esPrecipicio z14)
+				(esAgua z22)
+				(esAgua z23)
+				(esAgua z24)
+				(esBosque z6)
+				(esBosque z25)
+
+				(estaEn bikini1 z3)
+				(estaEn zapatilla1 z4)
 				(estaEn princesa1 z7)
 				(estaEn principe1 z8)
 				(estaEn leonardo1 z9)
 				(estaEn oscar1 z9)
 				(estaEn rosa1 z12)
 				(estaEn bruja1 z12)
-				(estaEn oro1 z13)
 				(estaEn jugador1 z13)
 				(estaEn algoritmo1 z14)
 				(estaEn profesor1 z18)
 				(estaEn manzana1 z18)
+				(estaEn oro1 z24)
+				(estaEn algoritmo2 z25)
 
 				(= (conectadas z1 z2) 1)
 				(= (conectadas z2 z1) 3)
@@ -152,7 +178,7 @@
 				(= (distanciaZona z25 z20) 30)
 		)
 
-		(:goal (and (tiene profesor1 oscar1) (tiene principe1 rosa1) (tiene princesa1 algoritmo1) (tiene bruja1 manzana1) (tiene leonardo1 oro1)))
+		(:goal (and (tiene profesor1 oscar1) (tiene principe1 oro1) (tiene princesa1 rosa1) (tiene bruja1 manzana1) (tiene leonardo1 algoritmo2)))
 
 		(:metric minimize (distanciaTotal jugador1))
 )

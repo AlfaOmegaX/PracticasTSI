@@ -2,64 +2,53 @@
     (:requirements :strips :adl :equality :typing :fluents)
 
     (:types
-        Zona
-        Orientacion
-        Oscar Manzana Rosa Algoritmo Oro - Objeto
-        Princesa Principe Bruja Profesor Leonardo - Npc
-        Npc Player - Persona
-        Persona Objeto - Posicionable
+      Zona
+      Oscar Manzana Rosa Algoritmo Oro - Objeto
+      Princesa Principe Bruja Profesor Leonardo - Npc
+      Npc Player - Persona
+      Persona Objeto - Posicionable
     )
 
     (:predicates
-      (conectadasN ?z1 - Zona ?z2 - Zona)
-      (conectadasS ?z1 - Zona ?z2 - Zona)
-      (conectadasO ?z1 - Zona ?z2 - Zona)
-      (conectadasE ?z1 - Zona ?z2 - Zona)
-      (orientadoN ?j - Player)
-      (orientadoS ?j - Player)
-      (orientadoO ?j - Player)
-      (orientadoE ?j - Player)
       (estaEn ?p - Posicionable ?z - Zona)
       (tiene ?p - Persona ?o - Objeto)
       (manoLlena ?j - Player)
     )
 
     (:functions
+      (conectadas ?z1 - Zona ?z2 - Zona)
+      (orientado ?j - Player)
       (distanciaZona ?z1 - Zona ?z2 - Zona)
       (distanciaTotal ?j - Player)
     )
 
     (:action girarIzquierda
       :parameters (?j - Player)
-      :effect (and (when (and (orientadoN ?j))
-                      (and (orientadoO ?j) (not (orientadoN ?j))))
-                   (when (and (orientadoE ?J))
-                      (and (orientadoN ?j) (not (orientadoE ?j))))
-                   (when (and (orientadoS ?j))
-                      (and (orientadoE ?j) (not (orientadoS ?j))))
-                   (when (and (orientadoO ?j))
-                      (and (orientadoS ?j) (not (orientadoO ?j)))))
+      :effect (and (when (and (= (orientado ?j) 0))
+                      (and (increase (orientado ?j) 3)))
+                   (when (and (= (orientado ?j) 1))
+                      (and (decrease (orientado ?j) 1)))
+                   (when (and (= (orientado ?j) 2))
+                      (and (decrease (orientado ?j) 1)))
+                   (when (and (= (orientado ?j) 3))
+                      (and (decrease (orientado ?j) 1))))
     )
 
     (:action girarDerecha
       :parameters (?j - Player)
-      :effect (and (when (and (orientadoN ?j))
-                      (and (orientadoE ?j) (not (orientadoN ?j))))
-                   (when (and (orientadoE ?J))
-                      (and (orientadoS ?j) (not (orientadoE ?j))))
-                   (when (and (orientadoS ?j))
-                      (and (orientadoO ?j) (not (orientadoS ?j))))
-                   (when (and (orientadoO ?j))
-                      (and (orientadoN ?j) (not (orientadoO ?j)))))
+      :effect (and (when (and (= (orientado ?j) 0))
+                      (and (increase (orientado ?j) 1)))
+                   (when (and (= (orientado ?j) 1))
+                      (and (increase (orientado ?j) 1)))
+                   (when (and (= (orientado ?j) 2))
+                      (and (increase (orientado ?j) 1)))
+                   (when (and (= (orientado ?j) 3))
+                      (and (decrease (orientado ?j) 3))))
     )
 
     (:action moverseA
       :parameters (?j - Player ?z1 - Zona ?z2 - Zona)
-      :precondition (and (estaEn ?j ?z1)
-                    (or (and (orientadoN ?j) (conectadasN ?z1 ?z2))
-                        (and (orientadoE ?j) (conectadasE ?z1 ?z2))
-                        (and (orientadoO ?j) (conectadasO ?z1 ?z2))
-                        (and (orientadoS ?j) (conectadasS ?z1 ?z2))))
+      :precondition (and (estaEn ?j ?z1) (= (orientado ?j) (conectadas ?z1 ?z2)))
       :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaTotal ?j) (distanciaZona ?z1 ?z2)))
     )
 

@@ -1,0 +1,25 @@
+Dominio:Ejercicio4
+
+Problema:Problema4
+
+numero de zonas:25
+
+puntos_totales:50
+
+H -> z1[][Agua]=1=z2[algoritmo1-Algoritmo][Piedra]=1=z3[][Piedra]=1=z4[zapatilla1-Zapatilla][Piedra]=1=z5[bruja1-Bruja][Piedra]
+
+H -> z6[leonardo1-Leonardo][Agua]=1=z7[][Precipicio]=1=z8[][Piedra]=1=z9[][Piedra]=1=z10[oscar1-Oscar][Piedra]
+
+H -> z11[oro1-Oro][Agua]=1=z12[][Precipicio]=1=z13[jugador1-Player][Piedra]=1=z14[][Bosque]=1=z15[rosa1-Rosa][Bosque]
+
+H -> z16[zapatilla2-Zapatilla][Agua]=1=z17[][Precipicio]=1=z18[manzana1-Manzana][Piedra]=1=z19[bikini1-Bikini][Bosque]=1=z20[bikini2-Bikini][Bosque]
+
+H -> z21[princesa1-Princesa][Agua]=1=z22[][Precipicio]=1=z23[profesor1-Profesor][Piedra]=1=z24[][Bosque]=1=z25[principe1-Principe][Bosque]
+
+V -> z1[][]=1=z6[][]=1=z11[][]=1=z16[][]=1=z21[][]
+
+V -> z2[][]=1=z7[][]=1=z12[][]=1=z17[][]=1=z22[][]
+
+V -> z3[][]=1=z8[][]=1=z13[][]=1=z18[][]=1=z23[][]
+
+V -> z4[][]=1=z9[][]=1=z14[][]=1=z19[][]=1=z24[][]
