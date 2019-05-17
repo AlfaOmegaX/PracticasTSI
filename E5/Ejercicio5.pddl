@@ -74,15 +74,15 @@
     )
 
     (:action dejarObjeto
-        :parameters (?j - Player ?o - Objeto ?z - Zona)
-        :precondition (and (tiene ?j ?o) (estaEn ?j ?z))
-        :effect (and (estaEn ?o ?z) (not (tiene ?j ?o)) (not (manoLlena ?j)))
+      :parameters (?j - Player ?o - Objeto ?z - Zona)
+      :precondition (and (tiene ?j ?o) (estaEn ?j ?z))
+      :effect (and (estaEn ?o ?z) (not (tiene ?j ?o)) (not (manoLlena ?j)))
     )
 
     (:action entregarObjeto
-        :parameters (?j - Player ?p - Npc ?o - ObjetoEntregable ?z - Zona)
-        :precondition (and (estaEn ?j ?z) (estaEn ?p ?z) (tiene ?j ?o) (> (maxBolsillo ?p) (nBolsillo ?p)))
-        :effect (and (tiene ?p ?o) (not (tiene ?j ?o)) (not (manoLlena ?j)) (increase (puntosJugador ?j) (daPuntos ?p ?o)) (increase (nBolsillo ?p) 1))
+      :parameters (?j - Player ?p - Npc ?o - ObjetoEntregable ?z - Zona)
+      :precondition (and (estaEn ?j ?z) (estaEn ?p ?z) (tiene ?j ?o) (> (maxBolsillo ?p) (nBolsillo ?p)))
+      :effect (and (tiene ?p ?o) (not (tiene ?j ?o)) (not (manoLlena ?j)) (increase (puntosJugador ?j) (daPuntos ?p ?o)) (increase (nBolsillo ?p) 1))
     )
 
     (:action meterEnMochila

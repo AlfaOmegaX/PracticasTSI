@@ -1,4 +1,4 @@
-﻿(define (domain Ejercicio4)
+﻿(define (domain Ejercicio6)
     (:requirements :strips :adl :equality :typing :fluents)
 
     (:types
@@ -28,9 +28,13 @@
       (conectadas ?z1 - Zona ?z2 - Zona)
       (orientado ?j - Player)
       (distanciaZona ?z1 - Zona ?z2 - Zona)
-      (distanciaTotal ?j - Player)
+      (distanciaJugador ?j - Player)
       (puntosJugador ?j - Player)
       (daPuntos ?p - Npc ?o - Objeto)
+      (maxBolsillo ?p - Npc)
+      (nBolsillo ?p - Npc)
+      (puntosTotales)
+      (distanciaTotal)
     )
 
     (:action girarIzquierda
@@ -62,7 +66,7 @@
       :precondition (and (estaEn ?j ?z1) (= (orientado ?j) (conectadas ?z1 ?z2)) (not (esPrecipicio ?z2))
                          (or (not (esBosque ?z2)) (and (esZapatilla ?o) (or (tiene ?j ?o) (enMochila ?j ?o))))
                          (or (not (esAgua ?z2)) (and (esBikini ?o) (or (tiene ?j ?o) (enMochila ?j ?o)))))
-      :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaTotal ?j) (distanciaZona ?z1 ?z2)))
+      :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaJugador ?j) (distanciaZona ?z1 ?z2)) (increase (distanciaTotal) (distanciaZona ?z1 ?z2)))
     )
 
     (:action cogerObjeto
@@ -79,8 +83,8 @@
 
     (:action entregarObjeto
       :parameters (?j - Player ?p - Npc ?o - ObjetoEntregable ?z - Zona)
-      :precondition (and (estaEn ?j ?z) (estaEn ?p ?z) (tiene ?j ?o))
-      :effect (and (tiene ?p ?o) (not (tiene ?j ?o)) (not (manoLlena ?j)) (increase (puntosJugador ?j) (daPuntos ?p ?o)))
+      :precondition (and (estaEn ?j ?z) (estaEn ?p ?z) (tiene ?j ?o) (> (maxBolsillo ?p) (nBolsillo ?p)))
+      :effect (and (tiene ?p ?o) (not (tiene ?j ?o)) (not (manoLlena ?j)) (increase (puntosJugador ?j) (daPuntos ?p ?o)) (increase (nBolsillo ?p) 1) (increase (puntosTotales) (daPuntos ?p ?o)))
     )
 
     (:action meterEnMochila

@@ -1,4 +1,4 @@
-﻿(define (domain Ejercicio4)
+﻿(define (domain Ejercicio7)
     (:requirements :strips :adl :equality :typing :fluents)
 
     (:types
@@ -7,6 +7,7 @@
       Oscar Manzana Rosa Algoritmo Oro - ObjetoEntregable
       ObjetoUsable ObjetoEntregable - Objeto
       Princesa Principe Bruja Profesor Leonardo - Npc
+      Picker Dealer - Player
       Npc Player - Persona
       Persona Objeto - Posicionable
     )
@@ -28,9 +29,13 @@
       (conectadas ?z1 - Zona ?z2 - Zona)
       (orientado ?j - Player)
       (distanciaZona ?z1 - Zona ?z2 - Zona)
-      (distanciaTotal ?j - Player)
-      (puntosJugador ?j - Player)
+      (distanciaJugador ?j - Player)
+      (puntosJugador ?j - Dealer)
       (daPuntos ?p - Npc ?o - Objeto)
+      (maxBolsillo ?p - Npc)
+      (nBolsillo ?p - Npc)
+      (puntosTotales)
+      (distanciaTotal)
     )
 
     (:action girarIzquierda
@@ -62,11 +67,11 @@
       :precondition (and (estaEn ?j ?z1) (= (orientado ?j) (conectadas ?z1 ?z2)) (not (esPrecipicio ?z2))
                          (or (not (esBosque ?z2)) (and (esZapatilla ?o) (or (tiene ?j ?o) (enMochila ?j ?o))))
                          (or (not (esAgua ?z2)) (and (esBikini ?o) (or (tiene ?j ?o) (enMochila ?j ?o)))))
-      :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaTotal ?j) (distanciaZona ?z1 ?z2)))
+      :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaJugador ?j) (distanciaZona ?z1 ?z2)) (increase (distanciaTotal) (distanciaZona ?z1 ?z2)))
     )
 
     (:action cogerObjeto
-      :parameters (?j - Player ?o - Objeto ?z - Zona)
+      :parameters (?j - Picker ?o - Objeto ?z - Zona)
       :precondition (and (estaEn ?j ?z) (estaEn ?o ?z) (not (manoLlena ?j)))
       :effect (and (tiene ?j ?o) (manoLlena ?j) (not (estaEn ?o ?z)))
     )
@@ -78,9 +83,15 @@
     )
 
     (:action entregarObjeto
-      :parameters (?j - Player ?p - Npc ?o - ObjetoEntregable ?z - Zona)
-      :precondition (and (estaEn ?j ?z) (estaEn ?p ?z) (tiene ?j ?o))
-      :effect (and (tiene ?p ?o) (not (tiene ?j ?o)) (not (manoLlena ?j)) (increase (puntosJugador ?j) (daPuntos ?p ?o)))
+      :parameters (?j - Dealer ?p - Npc ?o - ObjetoEntregable ?z - Zona)
+      :precondition (and (estaEn ?j ?z) (estaEn ?p ?z) (tiene ?j ?o) (> (maxBolsillo ?p) (nBolsillo ?p)))
+      :effect (and (tiene ?p ?o) (not (tiene ?j ?o)) (not (manoLlena ?j)) (increase (puntosJugador ?j) (daPuntos ?p ?o)) (increase (nBolsillo ?p) 1) (increase (puntosTotales) (daPuntos ?p ?o)))
+    )
+
+    (:action darADealer
+      :parameters (?j1 - Picker ?j2 - Dealer ?o - Objeto ?z - Zona)
+      :precondition (and (estaEn ?j1 ?z) (estaEn ?j2 ?z) (tiene ?j1 ?o) (not (manoLlena ?j2)))
+      :effect (and (not (tiene ?j1 ?o)) (not (manoLlena ?j1)) (manoLlena ?j2) (tiene ?j2 ?o))
     )
 
     (:action meterEnMochila
