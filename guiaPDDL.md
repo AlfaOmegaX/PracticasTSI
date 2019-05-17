@@ -229,6 +229,8 @@ Veamos estas dos estructuras con un ejemplo:
 ```
 Para cada objeto del tipo `Perro` se mira se si cumple la condicion `(esGoodBoi ?p)` y si se cumple (que sí, jeje) entonces se añade `(soyFelizCon ?p)`.
 
+**Nota**: `when` solo se puede usar en `effect`.  
+
 # Ejecutando
 Se da por hecho que habeis descargado el programa MetricFF de los archivos de la práctica2 que hay en PRADO, pues teniendo los archivos de domain y problem se ejecutan así:
 
