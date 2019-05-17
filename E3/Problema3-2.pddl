@@ -116,7 +116,8 @@
 				(= (conectadas z20 z25) 2)
 				(= (conectadas z25 z20) 0)
 
-				(= (distanciaTotal jugador1) 0)
+				(= (distanciaTotal) 0)
+				(= (distanciaJugador jugador1) 0)
 
 				(= (distanciaZona z1 z2) 10)
 				(= (distanciaZona z2 z1) 10)
@@ -180,5 +181,5 @@
 
 		(:goal (and (tiene profesor1 oscar1) (tiene principe1 oro1) (tiene princesa1 rosa1) (tiene bruja1 manzana1) (tiene leonardo1 algoritmo2)))
 
-		(:metric minimize (distanciaTotal jugador1))
+		(:metric minimize (distanciaTotal))
 )

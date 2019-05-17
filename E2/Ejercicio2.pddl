@@ -19,7 +19,8 @@
       (conectadas ?z1 - Zona ?z2 - Zona)
       (orientado ?j - Player)
       (distanciaZona ?z1 - Zona ?z2 - Zona)
-      (distanciaTotal ?j - Player)
+      (distanciaJugador ?j - Player)
+      (distanciaTotal)
     )
 
     (:action girarIzquierda
@@ -49,7 +50,8 @@
     (:action moverseA
       :parameters (?j - Player ?z1 - Zona ?z2 - Zona)
       :precondition (and (estaEn ?j ?z1) (= (orientado ?j) (conectadas ?z1 ?z2)))
-      :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaTotal ?j) (distanciaZona ?z1 ?z2)))
+      :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaJugador ?j) (distanciaZona ?z1 ?z2))
+      (increase (distanciaTotal) (distanciaZona ?z1 ?z2)))
     )
 
     (:action cogerObjeto

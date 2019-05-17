@@ -46,8 +46,9 @@
 				(= (conectadas z6 z7) 1)
 				(= (conectadas z7 z6) 3)
 
+				(= (distanciaTotal) 0)
 				(= (puntosJugador player1) 0)
-				(= (distanciaTotal player1) 0)
+				(= (distanciaJugador player1) 0)
 
 				(= (distanciaZona z1 z3) 10)
 				(= (distanciaZona z3 z1) 10)
@@ -70,5 +71,5 @@
 
 		(:goal (and (>= (puntosJugador player1) 15)))
 
-		(:metric minimize (distanciaTotal player1))
+		(:metric minimize (distanciaTotal))
 )

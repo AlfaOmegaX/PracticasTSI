@@ -46,7 +46,8 @@
 				(= (conectadas z6 z7) 1)
 				(= (conectadas z7 z6) 3)
 
-				(= (distanciaTotal player1) 0)
+				(= (distanciaTotal) 0)
+				(= (distanciaJugador player1) 0)
 
 				(= (distanciaZona z1 z3) 10)
 				(= (distanciaZona z3 z1) 10)
@@ -64,5 +65,5 @@
 
 		(:goal (and (tiene princesa1 manzana1) (tiene bruja1 oscar1)))
 
-		(:metric minimize (distanciaTotal player1))
+		(:metric minimize (distanciaTotal))
 )

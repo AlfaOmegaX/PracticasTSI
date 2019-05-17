@@ -46,7 +46,7 @@ def clasificar(zona, nombreItem, tipoItem):
     # Si es el jugador se añade el predicado de orientación
     if tipoItem == "Player":
         mInit[1] += "\t\t\t\t(= (orientado" + " " + nombreItem + ") 0)\n"
-        mInit[5] += "\t\t\t\t(= (distanciaTotal " + nombreItem + ") 0)\n"
+        mInit[5] += "\t\t\t\t(= (distanciaJugador " + nombreItem + ") 0)\n"
     # Si es un tipo especial que necesita predicado de es algo
     elif ind in range(11, 16):
         mInit[2] += "\t\t\t\t(es" + tipoItem + " " + nombreItem + ")\n"
@@ -73,6 +73,8 @@ sinSaltos.pop(0);
 # Nº de zonas
 nZonas = recortar(sinSaltos[0])
 sinSaltos.pop(0);
+# Distancia total inicial
+mInit[5] += "\t\t\t\t(= (distanciaTotal) 0)\n"
 
 # Por cada linea leemos las conexiones
 for linea in sinSaltos:
@@ -162,11 +164,8 @@ for personaje in gPersonajes:
     gObjetos.pop(j)
 mGoal += "))\n"
 
-# Si no hay ni un jugador falla
-if lItems[0] == []:
-    exit("Error: no hay un jugador en el mapa.")
-# Minizamos la métrica del primer jugador
-mMetric += "(distanciaTotal " + lItems[0][0] + "))\n"
+# Minimizamos la distancia total recorrida
+mMetric += "(distanciaTotal))\n"
 
 # Juntamos todas las partes
 mGeneral += mProblem + mDomain + mObjects + mInit + mGoal + mMetric + ")"

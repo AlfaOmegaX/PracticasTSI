@@ -48,7 +48,7 @@ def clasificar(zona, nombreItem, tipoItem):
     if tipoItem == "Player":
         mInit[1] += "\t\t\t\t(= (orientado" + " " + nombreItem + ") 0)\n"
         mInit[5] += "\t\t\t\t(= (puntosJugador " + nombreItem + ") 0)\n"
-        mInit[5] += "\t\t\t\t(= (distanciaTotal " + nombreItem + ") 0)\n"
+        mInit[5] += "\t\t\t\t(= (distanciaJugador " + nombreItem + ") 0)\n"
     # Si es un tipo especial que necesita predicado de es algo
     elif ind in range(11, 16):
         mInit[2] += "\t\t\t\t(es" + tipoItem + " " + nombreItem + ")\n"
@@ -79,6 +79,8 @@ sinSaltos.pop(0)
 # Puntos totales
 pTotales = recortar(sinSaltos[0])
 sinSaltos.pop(0)
+# Distancia total inicial
+mInit[5] += "\t\t\t\t(= (distanciaTotal) 0)\n"
 
 # Por cada linea leemos las conexiones
 for linea in sinSaltos:
@@ -168,7 +170,7 @@ jugPrimero = lItems[0][0]
 mGoal += "(>= (puntosJugador " + jugPrimero + ") " + pTotales + ")))\n"
 
 # :metric (minimizar distancia total)
-mMetric += "(distanciaTotal " + jugPrimero + "))\n"
+mMetric += "(distanciaTotal))\n"
 
 # Juntamos todas las partes
 mGeneral += mProblem + mDomain + mObjects + mInit + mGoal + mMetric + ")"

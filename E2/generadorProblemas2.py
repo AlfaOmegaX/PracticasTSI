@@ -45,7 +45,7 @@ def clasificar(zona, item):
     # Si es el jugador se añade el predicado de orientación
     if tipoItem == "Player":
         mInit[1] += "\t\t\t\t(= (orientado" + " " + nombreItem + ") 0)\n"
-        mInit[4] += "\t\t\t\t(= (distanciaTotal " + nombreItem + ") 0)\n"
+        mInit[4] += "\t\t\t\t(= (distanciaJugador " + nombreItem + ") 0)\n"
 
 if len(sys.argv) != 2:
     sys.exit("Error: argumentos no válidos. Uso: python crearProblema.py nombreArchivoMapa.txt")
@@ -69,6 +69,9 @@ sinSaltos.pop(0);
 # Nº de zonas
 nZonas = recortar(sinSaltos[0])
 sinSaltos.pop(0);
+
+# Distancia total inicial
+mInit[4] += "\t\t\t\t(= (distanciaTotal) 0)\n"
 
 # Por cada linea leemos las conexiones
 for linea in sinSaltos:
@@ -129,7 +132,7 @@ for i in range(0, len(lItems)):
 mObjects += "\t\t)\n"
 
 # :init
-mInit[5] = mInit[5].rstrip("\n")
+mInit[-1] = mInit[-1].rstrip("\n")
 mAux = mInit[0]
 for linea in mInit[1:]:
     mAux += linea + "\n"
@@ -154,11 +157,8 @@ for personaje in gPersonajes:
     gObjetos.pop(j)
 mGoal += "))\n"
 
-# Si no hay ni un jugador falla
-if lItems[0] == []:
-    exit("Error: no hay un jugador en el mapa.")
-# Minizamos la métrica del primer jugador
-mMetric += "(distanciaTotal " + lItems[0][0] + "))\n"
+# Minizamos la distancia total recorrida
+mMetric += "(distanciaTotal))\n"
 
 # Juntamos todas las partes
 mGeneral += mProblem + mDomain + mObjects + mInit + mGoal + mMetric + ")"

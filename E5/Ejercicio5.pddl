@@ -28,7 +28,8 @@
       (conectadas ?z1 - Zona ?z2 - Zona)
       (orientado ?j - Player)
       (distanciaZona ?z1 - Zona ?z2 - Zona)
-      (distanciaTotal ?j - Player)
+      (distanciaJugador ?j - Player)
+      (distanciaTotal)
       (puntosJugador ?j - Player)
       (daPuntos ?p - Npc ?o - Objeto)
       (maxBolsillo ?p - Npc)
@@ -64,7 +65,8 @@
       :precondition (and (estaEn ?j ?z1) (= (orientado ?j) (conectadas ?z1 ?z2)) (not (esPrecipicio ?z2))
                          (or (not (esBosque ?z2)) (and (esZapatilla ?o) (or (tiene ?j ?o) (enMochila ?j ?o))))
                          (or (not (esAgua ?z2)) (and (esBikini ?o) (or (tiene ?j ?o) (enMochila ?j ?o)))))
-      :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaTotal ?j) (distanciaZona ?z1 ?z2)))
+      :effect (and (estaEn ?j ?z2) (not (estaEn ?j ?z1)) (increase (distanciaJugador ?j) (distanciaZona ?z1 ?z2))
+      (increase (distanciaTotal) (distanciaZona ?z1 ?z2)))
     )
 
     (:action cogerObjeto
