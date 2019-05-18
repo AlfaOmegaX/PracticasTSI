@@ -1,4 +1,4 @@
-(define (problem zeno-0)
+(define (problem zeno-3)
   (:domain zeno-travel)
 
   (:customization
