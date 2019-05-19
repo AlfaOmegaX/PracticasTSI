@@ -1,0 +1,103 @@
+
+ff: parsing domain file
+domain 'EJERCICIO6' defined
+ ... done.
+ff: parsing problem file
+problem 'PROBLEMA6' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+task contains conditional effects. turning off state domination.
+
+
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is EHC, if that fails then  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+Cueing down from goal distance:   24 into depth [1][2][3]
+                                  20            [1]
+                                  14            [1][2][3]
+                                  13            [1][2]
+                                  12            [1]
+                                  11            [1]
+                                  10            [1][2]
+                                   9            [1][2]
+                                   8            [1][2][3][4]
+                                   7            [1]
+                                   6            [1]
+                                   5            [1]
+                                   4            [1][2][3][4][5][6][7][8][9][10]
+                                   3            [1]
+                                   2            [1][2][3][4][5][6][7][8][9][10][11][12][13][14]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: GIRARDERECHA PLAYER2
+        1: MOVERSEA PLAYER2 Z2 Z3 BIKINI1
+        2: GIRARDERECHA PLAYER1
+        3: MOVERSEA PLAYER1 Z2 Z3 BIKINI1
+        4: COGEROBJETO PLAYER1 ZAPATILLA1 Z3
+        5: METERENMOCHILA PLAYER1 ZAPATILLA1
+        6: GIRARDERECHA PLAYER2
+        7: COGEROBJETO PLAYER2 BIKINI1 Z3
+        8: MOVERSEA PLAYER2 Z3 Z6 BIKINI1
+        9: METERENMOCHILA PLAYER2 BIKINI1
+       10: COGEROBJETO PLAYER2 ROSA2 Z6
+       11: GIRARIZQUIERDA PLAYER2
+       12: MOVERSEA PLAYER2 Z6 Z7 BIKINI1
+       13: ENTREGAROBJETO PLAYER2 PRINCESA1 ROSA2 Z7
+       14: COGEROBJETO PLAYER2 OSCAR2 Z7
+       15: MOVERSEA PLAYER1 Z3 Z4 BIKINI1
+       16: COGEROBJETO PLAYER1 MANZANA1 Z4
+       17: GIRARIZQUIERDA PLAYER1
+       18: GIRARIZQUIERDA PLAYER1
+       19: MOVERSEA PLAYER1 Z4 Z3 BIKINI1
+       20: GIRARDERECHA PLAYER1
+       21: MOVERSEA PLAYER1 Z3 Z1 ZAPATILLA1
+       22: ENTREGAROBJETO PLAYER2 PRINCESA1 OSCAR2 Z7
+       23: COGEROBJETO PLAYER2 ORO1 Z7
+       24: ENTREGAROBJETO PLAYER2 PRINCESA1 ORO1 Z7
+       25: GIRARIZQUIERDA PLAYER2
+       26: GIRARIZQUIERDA PLAYER2
+       27: MOVERSEA PLAYER2 Z7 Z6 BIKINI1
+       28: COGEROBJETO PLAYER2 ORO2 Z6
+       29: GIRARDERECHA PLAYER2
+       30: GIRARDERECHA PLAYER2
+       31: MOVERSEA PLAYER2 Z6 Z7 BIKINI1
+       32: ENTREGAROBJETO PLAYER2 PRINCESA1 ORO2 Z7
+       33: ENTREGAROBJETO PLAYER1 BRUJA1 MANZANA1 Z1
+       34: GIRARIZQUIERDA PLAYER1
+       35: GIRARIZQUIERDA PLAYER1
+       36: MOVERSEA PLAYER1 Z1 Z3 BIKINI1
+       37: MOVERSEA PLAYER1 Z3 Z6 BIKINI1
+       38: GIRARDERECHA PLAYER1
+       39: MOVERSEA PLAYER1 Z6 Z5 ZAPATILLA1
+       40: COGEROBJETO PLAYER1 MANZANA2 Z5
+       41: GIRARDERECHA PLAYER1
+       42: GIRARDERECHA PLAYER1
+       43: MOVERSEA PLAYER1 Z5 Z6 BIKINI1
+       44: GIRARIZQUIERDA PLAYER1
+       45: MOVERSEA PLAYER1 Z6 Z3 BIKINI1
+       46: MOVERSEA PLAYER1 Z3 Z1 ZAPATILLA1
+       47: ENTREGAROBJETO PLAYER1 BRUJA1 MANZANA2 Z1
+     		Coste Total: 0.00
+
+
+time spent:    0.00 seconds instantiating 548 easy, 196 hard action templates
+               0.00 seconds reachability analysis, yielding 150 facts and 404 actions
+               0.00 seconds creating final representation with 148 relevant facts, 14 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.01 seconds searching, evaluating 485 states, to a max depth of 14
+               0.01 seconds total time
+

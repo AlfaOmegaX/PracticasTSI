@@ -1,0 +1,110 @@
+
+ff: parsing domain file
+domain 'EJERCICIO3' defined
+ ... done.
+ff: parsing problem file
+problem 'PROBLEMA3' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+task contains conditional effects. turning off state domination.
+
+
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is EHC, if that fails then  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+Cueing down from goal distance:   13 into depth [1][2][3]
+                                  12            [1][2]
+                                  11            [1][2][3][4][5][6]
+                                  10            [1][2][3][4][5][6][7][8][9][10][11][12]
+                                   9            [1][2] --- pruning stopped --- [1][2][3][4][5][6][7][8][9][10][11][12]
+                                   8            [1]
+                                   7            [1][2][3]
+                                   6            [1][2]
+                                   5            [1]
+                                   4            [1][2][3][4][5][6]
+                                   3            [1] --- pruning stopped --- [1][2][3][4][5][6][7][8]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: GIRARDERECHA PLAYER1
+        1: MOVERSEA PLAYER1 Z2 Z3 BIKINI1
+        2: GIRARIZQUIERDA PLAYER1
+        3: COGEROBJETO PLAYER1 ZAPATILLA1 Z3
+        4: METERENMOCHILA PLAYER1 ZAPATILLA1
+        5: GIRARDERECHA PLAYER1
+        6: MOVERSEA PLAYER1 Z3 Z4 BIKINI1
+        7: COGEROBJETO PLAYER1 MANZANA1 Z4
+        8: GIRARDERECHA PLAYER1
+        9: GIRARDERECHA PLAYER1
+       10: MOVERSEA PLAYER1 Z4 Z3 BIKINI1
+       11: DEJAROBJETO PLAYER1 MANZANA1 Z3
+       12: GIRARIZQUIERDA PLAYER1
+       13: MOVERSEA PLAYER1 Z3 Z6 BIKINI1
+       14: GIRARDERECHA PLAYER1
+       15: MOVERSEA PLAYER1 Z6 Z5 ZAPATILLA1
+       16: COGEROBJETO PLAYER1 BIKINI1 Z5
+       17: GIRARDERECHA PLAYER1
+       18: GIRARDERECHA PLAYER1
+       19: MOVERSEA PLAYER1 Z5 Z6 BIKINI1
+       20: MOVERSEA PLAYER1 Z6 Z7 BIKINI1
+       21: DEJAROBJETO PLAYER1 BIKINI1 Z7
+       22: GIRARIZQUIERDA PLAYER1
+       23: COGEROBJETO PLAYER1 BIKINI1 Z7
+       24: GIRARIZQUIERDA PLAYER1
+       25: MOVERSEA PLAYER1 Z7 Z6 BIKINI1
+       26: DEJAROBJETO PLAYER1 BIKINI1 Z6
+       27: MOVERSEA PLAYER1 Z6 Z5 ZAPATILLA1
+       28: COGEROBJETO PLAYER1 OSCAR1 Z5
+       29: GIRARDERECHA PLAYER1
+       30: GIRARDERECHA PLAYER1
+       31: MOVERSEA PLAYER1 Z5 Z6 BIKINI1
+       32: GIRARIZQUIERDA PLAYER1
+       33: MOVERSEA PLAYER1 Z6 Z3 BIKINI1
+       34: MOVERSEA PLAYER1 Z3 Z1 ZAPATILLA1
+       35: ENTREGAROBJETO PLAYER1 BRUJA1 OSCAR1 Z1
+       36: GIRARIZQUIERDA PLAYER1
+       37: GIRARIZQUIERDA PLAYER1
+       38: MOVERSEA PLAYER1 Z1 Z3 BIKINI1
+       39: COGEROBJETO PLAYER1 MANZANA1 Z3
+       40: MOVERSEA PLAYER1 Z3 Z6 BIKINI1
+       41: GIRARIZQUIERDA PLAYER1
+       42: DEJAROBJETO PLAYER1 MANZANA1 Z6
+       43: COGEROBJETO PLAYER1 BIKINI1 Z6
+       44: MOVERSEA PLAYER1 Z6 Z7 BIKINI1
+       45: DEJAROBJETO PLAYER1 BIKINI1 Z7
+       46: GIRARIZQUIERDA PLAYER1
+       47: GIRARIZQUIERDA PLAYER1
+       48: SACARDEMOCHILA PLAYER1 ZAPATILLA1
+       49: DEJAROBJETO PLAYER1 ZAPATILLA1 Z7
+       50: COGEROBJETO PLAYER1 BIKINI1 Z7
+       51: METERENMOCHILA PLAYER1 BIKINI1
+       52: MOVERSEA PLAYER1 Z7 Z6 BIKINI1
+       53: COGEROBJETO PLAYER1 MANZANA1 Z6
+       54: GIRARDERECHA PLAYER1
+       55: GIRARDERECHA PLAYER1
+       56: MOVERSEA PLAYER1 Z6 Z7 BIKINI1
+       57: ENTREGAROBJETO PLAYER1 PRINCESA1 MANZANA1 Z7
+     		Coste Total: 0.00
+
+
+time spent:    0.00 seconds instantiating 94 easy, 98 hard action templates
+               0.00 seconds reachability analysis, yielding 53 facts and 94 actions
+               0.00 seconds creating final representation with 51 relevant facts, 4 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.01 seconds searching, evaluating 1107 states, to a max depth of 12
+               0.01 seconds total time
+

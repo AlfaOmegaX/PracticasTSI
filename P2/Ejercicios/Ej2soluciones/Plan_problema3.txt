@@ -1,0 +1,205 @@
+
+ff: parsing domain file
+domain 'EJERCICIO2' defined
+ ... done.
+ff: parsing problem file
+problem 'PROBLEMA2' defined
+ ... done.
+
+
+
+no optimization required. skipping criterion.
+
+
+no metric specified. plan length assumed.
+
+task contains conditional effects. turning off state domination.
+
+
+
+checking for cyclic := effects --- OK.
+
+ff: search configuration is EHC, if that fails then  best-first on 1*g(s) + 5*h(s) where
+    metric is  plan length
+
+Cueing down from goal distance:   35 into depth [1][2][3][4][5]
+                                  34            [1][2][3][4][5][6][7]
+                                  33            [1][2][3][4][5]
+                                  32            [1]
+                                  31            [1][2][3][4][5][6][7][8]
+                                  30            [1][2][3][4][5][6][7]
+                                  29            [1]
+                                  28            [1][2][3][4][5][6][7][8]
+                                  26            [1][2][3][4][5][6]
+                                  25            [1]
+                                  24            [1][2][3][4]
+                                  23            [1][2][3][4]
+                                  22            [1][2][3][4][5][6][7]
+                                  21            [1][2][3][4][5]
+                                  20            [1][2][3]
+                                  19            [1][2][3][4][5][6][7][8]
+                                  18            [1][2][3][4]
+                                  17            [1][2][3][4]
+                                  16            [1][2][3][4]
+                                  15            [1][2][3][4][5][6][7][8][9]
+                                  14            [1][2][3]
+                                  13            [1]
+                                  12            [1][2][3][4][5][6][7][8][9][10][11][12][13][14]
+                                  11            [1][2]
+                                  10            [1][2][3]
+                                   9            [1]
+                                   8            [1][2][3]
+                                   7            [1]
+                                   6            [1]
+                                   5            [1][2]
+                                   4            [1]
+                                   3            [1]
+                                   2            [1]
+                                   1            [1]
+                                   0            
+
+ff: found legal plan as follows
+
+step    0: MOVERSEA JUGADOR1 Z13 Z8
+        1: MOVERSEA JUGADOR1 Z8 Z3
+        2: COGEROBJETO JUGADOR1 OSCAR1 Z3
+        3: GIRARIZQUIERDA JUGADOR1
+        4: MOVERSEA JUGADOR1 Z3 Z2
+        5: DEJAROBJETO JUGADOR1 OSCAR1 Z2
+        6: MOVERSEA JUGADOR1 Z2 Z1
+        7: COGEROBJETO JUGADOR1 ORO1 Z1
+        8: GIRARDERECHA JUGADOR1
+        9: GIRARDERECHA JUGADOR1
+       10: MOVERSEA JUGADOR1 Z1 Z2
+       11: MOVERSEA JUGADOR1 Z2 Z3
+       12: GIRARDERECHA JUGADOR1
+       13: MOVERSEA JUGADOR1 Z3 Z8
+       14: GIRARDERECHA JUGADOR1
+       15: ENTREGAROBJETO JUGADOR1 PRINCIPE1 ORO1 Z8
+       16: MOVERSEA JUGADOR1 Z8 Z7
+       17: GIRARDERECHA JUGADOR1
+       18: MOVERSEA JUGADOR1 Z7 Z2
+       19: COGEROBJETO JUGADOR1 OSCAR1 Z2
+       20: GIRARIZQUIERDA JUGADOR1
+       21: GIRARIZQUIERDA JUGADOR1
+       22: MOVERSEA JUGADOR1 Z2 Z7
+       23: GIRARDERECHA JUGADOR1
+       24: GIRARDERECHA JUGADOR1
+       25: GIRARDERECHA JUGADOR1
+       26: MOVERSEA JUGADOR1 Z7 Z8
+       27: GIRARDERECHA JUGADOR1
+       28: MOVERSEA JUGADOR1 Z8 Z13
+       29: MOVERSEA JUGADOR1 Z13 Z18
+       30: GIRARDERECHA JUGADOR1
+       31: ENTREGAROBJETO JUGADOR1 PROFESOR1 OSCAR1 Z18
+       32: MOVERSEA JUGADOR1 Z18 Z17
+       33: MOVERSEA JUGADOR1 Z17 Z16
+       34: COGEROBJETO JUGADOR1 ALGORITMO2 Z16
+       35: GIRARDERECHA JUGADOR1
+       36: MOVERSEA JUGADOR1 Z16 Z11
+       37: GIRARDERECHA JUGADOR1
+       38: MOVERSEA JUGADOR1 Z11 Z12
+       39: GIRARIZQUIERDA JUGADOR1
+       40: MOVERSEA JUGADOR1 Z12 Z7
+       41: GIRARDERECHA JUGADOR1
+       42: MOVERSEA JUGADOR1 Z7 Z8
+       43: MOVERSEA JUGADOR1 Z8 Z9
+       44: ENTREGAROBJETO JUGADOR1 LEONARDO1 ALGORITMO2 Z9
+       45: GIRARIZQUIERDA JUGADOR1
+       46: GIRARIZQUIERDA JUGADOR1
+       47: MOVERSEA JUGADOR1 Z9 Z8
+       48: GIRARIZQUIERDA JUGADOR1
+       49: MOVERSEA JUGADOR1 Z8 Z13
+       50: GIRARDERECHA JUGADOR1
+       51: GIRARDERECHA JUGADOR1
+       52: GIRARDERECHA JUGADOR1
+       53: MOVERSEA JUGADOR1 Z13 Z14
+       54: GIRARIZQUIERDA JUGADOR1
+       55: COGEROBJETO JUGADOR1 ALGORITMO1 Z14
+       56: GIRARIZQUIERDA JUGADOR1
+       57: MOVERSEA JUGADOR1 Z14 Z13
+       58: MOVERSEA JUGADOR1 Z13 Z12
+       59: GIRARDERECHA JUGADOR1
+       60: MOVERSEA JUGADOR1 Z12 Z7
+       61: ENTREGAROBJETO JUGADOR1 PRINCESA1 ALGORITMO1 Z7
+       62: GIRARDERECHA JUGADOR1
+       63: MOVERSEA JUGADOR1 Z7 Z8
+       64: GIRARDERECHA JUGADOR1
+       65: MOVERSEA JUGADOR1 Z8 Z13
+       66: MOVERSEA JUGADOR1 Z13 Z18
+       67: GIRARDERECHA JUGADOR1
+       68: GIRARDERECHA JUGADOR1
+       69: GIRARDERECHA JUGADOR1
+       70: MOVERSEA JUGADOR1 Z18 Z19
+       71: MOVERSEA JUGADOR1 Z19 Z20
+       72: COGEROBJETO JUGADOR1 ROSA2 Z20
+       73: GIRARIZQUIERDA JUGADOR1
+       74: MOVERSEA JUGADOR1 Z20 Z15
+       75: GIRARIZQUIERDA JUGADOR1
+       76: MOVERSEA JUGADOR1 Z15 Z14
+       77: MOVERSEA JUGADOR1 Z14 Z13
+       78: MOVERSEA JUGADOR1 Z13 Z12
+       79: ENTREGAROBJETO JUGADOR1 BRUJA1 ROSA2 Z12
+       80: MOVERSEA JUGADOR1 Z12 Z11
+       81: GIRARIZQUIERDA JUGADOR1
+       82: MOVERSEA JUGADOR1 Z11 Z16
+       83: GIRARDERECHA JUGADOR1
+       84: GIRARDERECHA JUGADOR1
+       85: GIRARDERECHA JUGADOR1
+       86: MOVERSEA JUGADOR1 Z16 Z17
+       87: GIRARIZQUIERDA JUGADOR1
+       88: GIRARIZQUIERDA JUGADOR1
+       89: GIRARIZQUIERDA JUGADOR1
+       90: MOVERSEA JUGADOR1 Z17 Z22
+       91: GIRARDERECHA JUGADOR1
+       92: MOVERSEA JUGADOR1 Z22 Z21
+       93: COGEROBJETO JUGADOR1 MANZANA1 Z21
+       94: GIRARDERECHA JUGADOR1
+       95: GIRARDERECHA JUGADOR1
+       96: MOVERSEA JUGADOR1 Z21 Z22
+       97: MOVERSEA JUGADOR1 Z22 Z23
+       98: MOVERSEA JUGADOR1 Z23 Z24
+       99: ENTREGAROBJETO JUGADOR1 LEONARDO2 MANZANA1 Z24
+      100: GIRARIZQUIERDA JUGADOR1
+      101: GIRARIZQUIERDA JUGADOR1
+      102: MOVERSEA JUGADOR1 Z24 Z23
+      103: MOVERSEA JUGADOR1 Z23 Z22
+      104: GIRARDERECHA JUGADOR1
+      105: MOVERSEA JUGADOR1 Z22 Z17
+      106: GIRARDERECHA JUGADOR1
+      107: MOVERSEA JUGADOR1 Z17 Z18
+      108: MOVERSEA JUGADOR1 Z18 Z19
+      109: MOVERSEA JUGADOR1 Z19 Z20
+      110: GIRARIZQUIERDA JUGADOR1
+      111: MOVERSEA JUGADOR1 Z20 Z15
+      112: MOVERSEA JUGADOR1 Z15 Z10
+      113: MOVERSEA JUGADOR1 Z10 Z5
+      114: COGEROBJETO JUGADOR1 ROSA1 Z5
+      115: GIRARIZQUIERDA JUGADOR1
+      116: MOVERSEA JUGADOR1 Z5 Z4
+      117: GIRARIZQUIERDA JUGADOR1
+      118: MOVERSEA JUGADOR1 Z4 Z9
+      119: GIRARDERECHA JUGADOR1
+      120: MOVERSEA JUGADOR1 Z9 Z8
+      121: GIRARIZQUIERDA JUGADOR1
+      122: MOVERSEA JUGADOR1 Z8 Z13
+      123: MOVERSEA JUGADOR1 Z13 Z18
+      124: GIRARDERECHA JUGADOR1
+      125: MOVERSEA JUGADOR1 Z18 Z17
+      126: GIRARIZQUIERDA JUGADOR1
+      127: MOVERSEA JUGADOR1 Z17 Z22
+      128: GIRARIZQUIERDA JUGADOR1
+      129: MOVERSEA JUGADOR1 Z22 Z23
+      130: MOVERSEA JUGADOR1 Z23 Z24
+      131: ENTREGAROBJETO JUGADOR1 PRINCIPE2 ROSA1 Z24
+     		Coste Total: 0.00
+
+
+time spent:    0.00 seconds instantiating 7827 easy, 0 hard action templates
+               0.00 seconds reachability analysis, yielding 265 facts and 459 actions
+               0.00 seconds creating final representation with 258 relevant facts, 4 relevant fluents
+               0.00 seconds computing LNF
+               0.00 seconds building connectivity graph
+               0.04 seconds searching, evaluating 1194 states, to a max depth of 14
+               0.04 seconds total time
+

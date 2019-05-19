@@ -1,0 +1,30 @@
+Dominio:Ejercicio2
+
+Problema:Problema2
+
+numero de zonas:25
+
+
+H -> z1[oro1-Oro]=1=z2[]=1=z3[oscar1-Oscar]
+
+H -> z4[]=2=z5[rosa1-Rosa]
+
+H -> z7[princesa1-Princesa]=1=z8[principe1-Principe]=1=z9[leonardo1-Leonardo]
+
+H -> z11[]=2=z12[bruja1-Bruja]=2=z13[jugador1-Player]=1=z14[algoritmo1-Algoritmo]=2=z15[]
+
+H -> z16[algoritmo2-Algoritmo]=2=z17[]=2=z18[profesor1-Profesor]=2=z19[]=5=z20[rosa2-Rosa]
+
+H -> z21[manzana1-Manzana]=2=z22[]=2=z23[]=10=z24[principe2-Principe leonardo2-Leonardo]
+
+V -> z6[]=2=z11[]=3=z16[]
+
+V -> z2[]=10=z7[]=4=z12[]
+
+V -> z17[]=3=z22[]
+
+V -> z3[]=1=z8[]=1=z13[]=2=z18[]
+
+V -> z4[]=2=z9[]
+
+V -> z5[]=2=z10[]=1=z15[]=1=z20[]=2=z25[]

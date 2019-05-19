@@ -1,0 +1,33 @@
+Dominio:Ejercicio5
+
+Problema:Problema5
+
+numero de zonas:25
+
+bolsillo:[principe1:2 principe2:1 bruja1:1 bruja2:1 princesa1:2 princesa2:1 profesor1:1 leonardo1:1]
+
+puntos_totales:85
+
+H -> z1[oro1-Oro][Bosque]=10=z2[principe2-Principe][Bosque]=10=z3[oscar1-Oscar bikini1-Bikini][Bosque]
+
+H -> z4[zapatilla1-Zapatilla bruja2-Bruja][Arena]=20=z5[rosa1-Rosa princesa2-Princesa][Arena]
+
+H -> z7[princesa1-Princesa manzana2-Manzana][Agua]=10=z8[principe1-Principe][Bosque]=20=z9[zapatilla2-Zapatilla leonardo1-Leonardo][Agua]
+
+H -> z11[oro3-Oro][Bosque]=5=z12[bruja1-Bruja][Agua]=5=z13[oro2-Oro jugador1-Player][Arena]=10=z14[bikini3-Bikini][Precipicio]=20=z15[][Piedra]
+
+H -> z16[algoritmo1-Algoritmo rosa2-Rosa][Piedra]=10=z17[][Piedra]=5=z18[profesor1-Profesor][Piedra]=20=z19[rosa3-Rosa][Piedra]=10=z20[][Arena]
+
+H -> z21[manzana1-Manzana][Piedra]=10=z22[][Agua]=10=z23[][Agua]=20=z24[][Agua]
+
+V -> z6[bikini2-Bikini][Bosque]=5=z11[][Bosque]=20=z16[][Piedra]
+
+V -> z2[][Bosque]=5=z7[][Agua]=20=z12[][Agua]
+
+V -> z17[][Piedra]=10=z22[][Agua]
+
+V -> z3[][Bosque]=10=z8[][Bosque]=20=z13[][Arena]=20=z18[][Piedra]
+
+V -> z4[][Arena]=10=z9[][Agua]
+
+V -> z5[][Agua]=10=z10[][Arena]=20=z15[][Piedra]=30=z20[][Arena]=30=z25][Bosque]

@@ -1,0 +1,13 @@
+Dominio:Ejercicio4
+
+Problema:Problema4
+
+numero de zonas:7
+
+puntos_totales:15
+
+V -> z1[bruja1-Bruja][Bosque]=10=z3[zapatilla1-Zapatilla][Arena]=5=z6[][Piedra]
+
+H -> z2[player1-Player][Bosque]=10=z3[][Arena]=5=z4[manzana1-Manzana][Piedra]
+
+H -> z5[oscar1-Oscar bikini1-Bikini][Bosque]=10=z6[][Piedra]=5=z7[princesa1-Princesa][Agua]
