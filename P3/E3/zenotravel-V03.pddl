@@ -77,21 +77,14 @@
   (:task mover-avion
    :parameters (?a - aircraft ?c1 - city ?c2 - city)
 
-   ; Si no nos pasamos del límite volamos rápido
-   (:method vuelo-rapido
-      :precondition (viaje-rapido-posible ?a ?c1 ?c2)
-      :tasks ((comprobar-fuel ?a ?c1 ?c2) (zoom ?a ?c1 ?c2))
-   )
-
-   ; Si no es posible el vuelo rápido se intenta lento si no sobrepasamos el límite
-   (:method vuelo-lento
-      :precondition (viaje-lento-posible ?a ?c1 ?c2)
-      :tasks ((comprobar-fuel ?a ?c1 ?c2) (fly ?a ?c1 ?c2))
+   (:method volar
+     :precondition ()
+     :tasks ((comprobar-fuel ?a ?c1 ?c2) (modo-vuelo ?a ?c1 ?c2))
    )
   )
 
   (:task comprobar-fuel
-    :parameters (?a -aircraft ?c1 - city ?c2 - city)
+    :parameters (?a - aircraft ?c1 - city ?c2 - city)
 
     ; Si hay fuel suficiente no hace nada
     (:method fuel-suficiente
@@ -104,6 +97,23 @@
       :precondition (not (hay-fuel ?a ?c1 ?c2))
       :tasks (refuel ?a ?c1)
     )
+  )
+
+  (:task modo-vuelo
+    :parameters (?a - aircraft ?c1 - city ?c2 - city)
+
+    ; Si se puede volar en modo rápido
+    (:method vuelo-rapido
+      :precondition (viaje-rapido-posible ?a ?c1 ?c2)
+      :tasks ((zoom ?a ?c1 ?c2))
+    )
+
+    ; Si no es posible el viaje rápido comprueba el modo lento
+    (:method vuelo-lento
+      :precondition (viaje-lento-posible ?a ?c1 ?c2)
+      :tasks (fly ?a ?c1 ?c2)
+    )
+
   )
 
   (:import "Primitivas-Zenotravel.pddl")
