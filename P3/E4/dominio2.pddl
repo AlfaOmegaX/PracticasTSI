@@ -26,6 +26,7 @@
     (viaje-rapido-posible ?a ?c1 ?c2)
     (viaje-lento-posible ?a ?c1 ?c2)
     (destino ?x - person ?y - city)
+    (hay-hueco ?a - aircraft)
   )
 
   (:functions
@@ -43,7 +44,6 @@
     (fuel-limit)
     (max-people-capacity ?a - aircraft)
     (current-people-capacity ?a - aircraft)
-
   )
 
   (:derived (igual ?x ?x) ())
@@ -55,6 +55,8 @@
   (:derived (viaje-rapido-posible ?a - aircraft ?c1 - city ?c2 - city) (>= (fuel-limit) (+ (total-fuel-used) (* (distance ?c1 ?c2) (fast-burn ?a)))))
 
   (:derived (viaje-lento-posible ?a - aircraft ?c1 - city ?c2 - city) (>= (fuel-limit) (+ (total-fuel-used) (* (distance ?c1 ?c2) (slow-burn ?a)))))
+
+  (:derived (hay-hueco ?a - aircraft) (> (max-people-capacity ?a) (current-people-capacity ?a)))
 
   (:task transport-person
 	  :parameters (?p - person ?c - city)
@@ -74,7 +76,7 @@
     ; Si la persona no está en ciudad destino y el avión no está en la ciudad de la persona
     (:method Case3
       :precondition (and (at ?p - person ?c1 - city) (at ?a - aircraft ?c2 - city) (different ?c1 - city ?c2 - city))
-      :tasks ((volar ?a ?c2 ?c1) (volar ?a ?c1 ?c2))
+      :tasks ((volar ?a ?c2 ?c1) (volar ?a ?c1 ?c))
     )
   )
 
@@ -83,7 +85,7 @@
     :parameters (?a - aircraft ?c1 - city ?c2 - city)
 
     (:method base
-      :precondtion ()
+      :precondition ()
       :tasks ((entrar-avion ?a ?c1 ?c2) (mover-avion ?a ?c1 ?c2) (salida-avion ?a ?c2))
     )
   )
@@ -94,30 +96,30 @@
 
     ; Si hay gente en la ciudad ?c1 que quiere ir a ?c2 y hay espacio entran en el avión
     (:method queda-gente
-      :precondition (and (at ?p - person ?c1 - city) (destino ?p - person ?c2 - city) (> (max-people-capacity ?a - aircraft) (current-people-capacity ?a)))
-      :tasks ((board ?p ?a ?c1) (entrar-avion ?a ?c1))
+      :precondition (and (at ?p - person ?c1 - city) (destino ?p - person ?c2 - city) (hay-hueco ?a - aircraft))
+      :tasks ((board ?p ?a ?c1) (entrar-avion ?a ?c1 ?c2))
     )
 
     ; Cuando ya no hay más gente que quiera ir, paras
     (:method sin-gente
-      :precondtion ()
+      :precondition ()
       :tasks ()
     )
   )
 
   ; Salida de los pasajeros del avión
   (:task salida-avion
-    :parameters (?a - aircarft ?c - city)
+    :parameters (?a - aircraft ?c - city)
 
     ; Mientras queda gente en el avión salen
     (:method queda-gente
-      :precondtion (in ?p - person ?a - aircraft)
+      :precondition (in ?p - person ?a - aircraft)
       :tasks ((debark ?p ?a ?c) (salida-avion ?a ?c))
     )
 
     ; Cuando ya no hay más gente paro
     (:method sin-gente
-      :precondtion ()
+      :precondition ()
       :tasks ()
     )
   )

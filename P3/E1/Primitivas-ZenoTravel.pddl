@@ -4,8 +4,7 @@
  :condition (and  (at ?p ?c)
                   (at ?a ?c))
  :effect (and  (not (at ?p ?c))
-               (in ?p ?a)
-               (increase (current-people-capacity ?a) 1)))
+               (in ?p ?a)))
 
 (:durative-action debark
  :parameters (?p - person ?a - aircraft ?c - city)
@@ -13,8 +12,7 @@
  :condition (and (in ?p ?a)
                  (at ?a ?c))
  :effect (and  (not (in ?p ?a))
-               (at ?p ?c)
-               (decrease (current-people-capacity ?a) 1)))
+               (at ?p ?c)))
 
 (:durative-action fly
  :parameters (?a - aircraft ?c1 ?c2 - city)
@@ -26,7 +24,7 @@
                (at ?a ?c2)
               (increase (total-fuel-used)
                          (* (distance ?c1 ?c2) (slow-burn ?a)))
-              (decrease (fuel ?a)
+              (decrease (fuel ?a) 
                          (* (distance ?c1 ?c2) (slow-burn ?a)))))
 
 (:durative-action zoom

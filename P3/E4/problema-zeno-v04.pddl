@@ -1,4 +1,4 @@
-(define (problem zeno-3)
+(define (problem zeno-4)
   (:domain zeno-travel)
 
   (:customization
@@ -24,14 +24,14 @@
     (destino p2 c5)
     (destino p3 c5)
 
-    (= (fuel-limit) 1500)
     (= (distance c1 c2) 100)
     (= (distance c2 c3) 100)
     (= (distance c3 c4) 100)
     (= (distance c4 c5) 100)
     (= (distance c5 c1) 100)
     (= (distance c1 c5) 100)
-
+    (= (distance c2 c1) 100)
+    (= (distance c3 c2) 100)
     (= (distance c1 c3) 150)
     (= (distance c1 c4) 150)
     (= (distance c2 c5) 150)
@@ -39,9 +39,13 @@
     (= (distance c3 c1) 150)
     (= (distance c3 c5) 150)
     (= (distance c4 c2) 150)
+    (= (distance c4 c3) 100)
     (= (distance c4 c1) 150)
     (= (distance c5 c2) 150)
     (= (distance c5 c3) 150)
+    (= (distance c5 c4) 100)
+
+    (= (fuel-limit) 1500)
     (= (fuel a1) 200)
     (= (slow-speed a1) 10)
     (= (fast-speed a1) 20)
@@ -57,5 +61,5 @@
     (= (current-people-capacity a1) 0)
    )
 
-  (:tasks-goal :tasks ((transport-person p1 c5) (transport-person p2 c5) (transport-person p3 c5))
+  (:tasks-goal :tasks ((transport-person p1 c5) (transport-person p2 c5) (transport-person p3 c5)))
 )
