@@ -2,7 +2,8 @@
  :parameters (?p - person ?a - aircraft ?c - city)
  :duration (= ?duration (boarding-time))
  :condition (and  (at ?p ?c)
-                  (at ?a ?c))
+                  (at ?a ?c)
+                  (hay-hueco ?a))
  :effect (and  (not (at ?p ?c))
                (in ?p ?a)
                (increase (current-people-capacity ?a) 1)))
@@ -27,7 +28,9 @@
               (increase (total-fuel-used)
                          (* (distance ?c1 ?c2) (slow-burn ?a)))
               (decrease (fuel ?a)
-                         (* (distance ?c1 ?c2) (slow-burn ?a)))))
+                         (* (distance ?c1 ?c2) (slow-burn ?a)))
+              (increase (fly-time ?a)
+                         (/ (distance ?c1 ?c2) (slow-speed ?a)))))
 
 (:durative-action zoom
  :parameters (?a - aircraft ?c1 ?c2 - city)
@@ -39,8 +42,10 @@
                (at ?a ?c2)
                (increase (total-fuel-used)
                          (* (distance ?c1 ?c2) (fast-burn ?a)))
-              (decrease (fuel ?a)
-                         (* (distance ?c1 ?c2) (fast-burn ?a)))))
+               (decrease (fuel ?a)
+                         (* (distance ?c1 ?c2) (fast-burn ?a)))
+               (increase (fly-time ?a)
+                         (/ (distance ?c1 ?c2) (fast-speed ?a)))))
 
 (:durative-action refuel
  :parameters (?a - aircraft ?c - city)

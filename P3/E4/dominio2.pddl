@@ -3,6 +3,9 @@
   (:requirements
     :typing
     :fluents
+    :adl
+    :strips
+    :equality
     :derived-predicates
     :negative-preconditions
     :universal-preconditions
@@ -18,15 +21,17 @@
   (:constants slow fast - object)
 
   (:predicates
+    (igual ?x ?y)
+    (different ?x ?y)
     (at ?x - (either person aircraft) ?c - city)
     (in ?p - person ?a - aircraft)
-    (different ?x ?y)
-    (igual ?x ?y)
-    (hay-fuel ?a ?c1 ?c2)
-    (viaje-rapido-posible ?a ?c1 ?c2)
-    (viaje-lento-posible ?a ?c1 ?c2)
+    (falta-fuel ?a - aircraft)
+    (viaje-rapido-posible ?a - aircraft ?c1 - city ?c2 - city)
+    (viaje-lento-posible ?a - aircraft ?c1 - city ?c2 - city)
     (destino ?x - person ?y - city)
     (hay-hueco ?a - aircraft)
+    (aircraft-has-time-slow ?a - aircraft ?c1 - city ?c2 - city)
+    (aircraft-has-time-fast ?a - aircraft ?c1 - city ?c2 - city)
   )
 
   (:functions
@@ -44,13 +49,15 @@
     (fuel-limit)
     (max-people-capacity ?a - aircraft)
     (current-people-capacity ?a - aircraft)
+    (fly-time-max ?a - aircraft)
+    (fly-time ?a - aircraft)
   )
 
-  (:derived (igual ?x ?x) ())
+  (:derived (igual ?x - city ?y - city) (= ?x ?y))
 
-  (:derived (different ?x ?y) (not (igual ?x ?y)))
+  (:derived (different ?x - city ?y - city) (not (= ?x ?y)))
 
-  (:derived (hay-fuel ?a - aircraft ?c1 - city ?c2 - city) (> (fuel ?a) 1))
+  (:derived (falta-fuel ?a - aircraft) (> (capacity ?a) (fuel ?a)))
 
   (:derived (viaje-rapido-posible ?a - aircraft ?c1 - city ?c2 - city) (>= (fuel-limit) (+ (total-fuel-used) (* (distance ?c1 ?c2) (fast-burn ?a)))))
 
@@ -58,6 +65,11 @@
 
   (:derived (hay-hueco ?a - aircraft) (> (max-people-capacity ?a) (current-people-capacity ?a)))
 
+  (:derived (aircraft-has-time-slow ?a - aircraft ?c1 - city ?c2 - city) (>= (fly-time-max ?a) (+ (fly-time ?a) (/ (distance ?c1 ?c2) (slow-speed ?a)))))
+
+  (:derived (aircraft-has-time-fast ?a - aircraft ?c1 - city ?c2 - city) (>= (fly-time-max ?a) (+ (fly-time ?a) (/ (distance ?c1 ?c2) (fast-speed ?a)))))
+
+  ; Transporta la persona ?p a ?c
   (:task transport-person
 	  :parameters (?p - person ?c - city)
 
@@ -68,25 +80,27 @@
     )
 
     ; Si la persona no está ciudad destino pero avión y persona están en la misma ciudad
+    ; Hacemos board para que entre seguro
     (:method Case2
 	    :precondition (and (at ?p - person ?c1 - city) (at ?a - aircraft ?c1 - city))
-	    :tasks (volar ?a ?c1 ?c)
+	    :tasks ((board ?p ?a ?c1) (hacer-vuelo ?a ?c1 ?c))
     )
 
     ; Si la persona no está en ciudad destino y el avión no está en la ciudad de la persona
+    ; Hacemos board para que entre seguro
     (:method Case3
       :precondition (and (at ?p - person ?c1 - city) (at ?a - aircraft ?c2 - city) (different ?c1 - city ?c2 - city))
-      :tasks ((volar ?a ?c2 ?c1) (volar ?a ?c1 ?c))
+      :tasks ((hacer-vuelo ?a ?c2 ?c1) (transport-person ?p ?c))
     )
   )
 
   ; Un avión ?a vuela de ?c1 a ?c2 metiendo la gente, volando y descargando la gente
-  (:task volar
+  (:task hacer-vuelo
     :parameters (?a - aircraft ?c1 - city ?c2 - city)
 
     (:method base
-      :precondition ()
-      :tasks ((entrar-avion ?a ?c1 ?c2) (mover-avion ?a ?c1 ?c2) (salida-avion ?a ?c2))
+      :precondition (different ?c1 ?c2)
+      :tasks ((comprobar-fuel ?a ?c1 ?c2) (entrar-avion ?a ?c1 ?c2) (modo-vuelo ?a ?c1 ?c2) (salida-avion ?a ?c2))
     )
   )
 
@@ -113,7 +127,7 @@
 
     ; Mientras queda gente en el avión salen
     (:method queda-gente
-      :precondition (in ?p - person ?a - aircraft)
+      :precondition (in ?p - person ?a)
       :tasks ((debark ?p ?a ?c) (salida-avion ?a ?c))
     )
 
@@ -124,47 +138,36 @@
     )
   )
 
-  ; Mueve el avión ?a de ?c1 a ?c2
-  (:task mover-avion
-   :parameters (?a - aircraft ?c1 - city ?c2 - city)
-
-   ; Comprueba la gasolina y elige el modo de vuelo
-   (:method vuela
-     :precondition ()
-     :tasks ((comprobar-fuel ?a ?c1 ?c2) (modo-vuelo ?a ?c1 ?c2))
-   )
-  )
-
   ; Comprueba la gasolina del avion ?a
   (:task comprobar-fuel
     :parameters (?a - aircraft ?c1 - city ?c2 - city)
 
-    ; Si hay fuel suficiente no hace nada
-    (:method fuel-suficiente
-      :precondition (hay-fuel ?a ?c1 ?c2)
-      :tasks ()
+    ; Si no tiene el depósito lleno recarga
+    (:method fuel-no-lleno
+      :precondition (falta-fuel ?a)
+      :tasks (refuel ?a ?c1)
     )
 
-    ; Si no hay fuel recarga
-    (:method sin-fuel
-      :precondition (not (hay-fuel ?a ?c1 ?c2))
-      :tasks (refuel ?a ?c1)
+    ; Si tiene el depósito lleno no hace nada
+    (:method fuel-lleno
+      :precondition ()
+      :tasks ()
     )
   )
 
-  ; Elige el modo de vuelo (si se puede rápido se elige este)
+  ; Elige el modo de vuelo (por defecto rápido)
   (:task modo-vuelo
     :parameters (?a - aircraft ?c1 - city ?c2 - city)
 
     ; Si se puede volar en modo rápido
     (:method vuelo-rapido
-      :precondition (viaje-rapido-posible ?a ?c1 ?c2)
+      :precondition (and (viaje-rapido-posible ?a ?c1 ?c2) (aircraft-has-time-fast ?a ?c1 ?c2))
       :tasks (zoom ?a ?c1 ?c2)
     )
 
     ; Si no es posible el viaje rápido comprueba el modo lento
     (:method vuelo-lento
-      :precondition (viaje-lento-posible ?a ?c1 ?c2)
+      :precondition (and (viaje-lento-posible ?a ?c1 ?c2) (aircraft-has-time-slow ?a ?c1 ?c2))
       :tasks (fly ?a ?c1 ?c2)
     )
   )

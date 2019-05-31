@@ -20,8 +20,8 @@
   (:predicates
     (at ?x - (either person aircraft) ?c - city)
     (in ?p - person ?a - aircraft)
-    (different ?x ?y)
-    (igual ?x ?y)
+    (different ?x - city ?y - city)
+    (igual ?x - city ?y - city)
     (hay-fuel ?a ?c1 ?c2)
   )
 
@@ -39,12 +39,13 @@
     (debarking-time)
   )
 
-  (:derived (igual ?x ?x) ())
+  (:derived (igual ?x - city ?y - city) (= ?x ?y))
 
-  (:derived (different ?x ?y) (not (igual ?x ?y)))
+  (:derived (different ?x - city ?y - city) (not (= ?x ?y)))
 
   (:derived (hay-fuel ?a - aircraft ?c1 - city ?c2 - city) (> (fuel ?a) 1))
 
+  ; Transporta a la persona ?p a ?c
   (:task transport-person
 	  :parameters (?p - person ?c - city)
 
@@ -63,10 +64,11 @@
     ; Si la persona no está en ciudad destino y el avión no está en la ciudad de la persona
     (:method Case3
       :precondition (and (at ?p - person ?c1 - city) (at ?a - aircraft ?c2 - city) (different ?c1 - city ?c2 - city))
-      :tasks ((mover-avion ?a ?c2 ?c1) (board ?p ?a ?c1) (mover-avion ?a ?c1 ?c) (debark ?p ?a ?c))
+      :tasks ((mover-avion ?a ?c2 ?c1) (transport-person ?p ?c))
     )
   )
 
+  ; Mueve el avión ?a de ?c1 a ?c2
   (:task mover-avion
    :parameters (?a - aircraft ?c1 - city ?c2 - city)
 
