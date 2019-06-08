@@ -22,7 +22,7 @@
     (in ?p - person ?a - aircraft)
     (different ?x - city ?y - city)
     (igual ?x - city ?y - city)
-    (falta-fuel ?a - aircraft)
+    (falta-fuel ?a - aircraft ?c1 - city ?c2 - city)
   )
 
   (:functions
@@ -43,7 +43,7 @@
 
   (:derived (different ?x - city ?y - city) (not (= ?x ?y)))
 
-  (:derived (falta-fuel ?a - aircraft) (> (capacity ?a) (fuel ?a)))
+  (:derived (falta-fuel ?a - aircraft ?c1 - city ?c2 - city) (< (fuel ?a) (* (distance ?c1 ?c2) (slow-burn ?a))))
 
   ; Lleva a la persona ?p a ?c
   (:task transport-person
@@ -83,13 +83,13 @@
   (:task comprobar-fuel
     :parameters (?a - aircraft ?c1 - city ?c2 - city)
 
-    ; Si no tiene el depósito lleno recarga
+    ; Si falta fuel para viajar
     (:method fuel-no-lleno
-      :precondition (falta-fuel ?a)
+      :precondition (falta-fuel ?a ?c1 ?c2)
       :tasks (refuel ?a ?c1)
     )
 
-    ; Si tiene el depósito lleno no hace nada
+    ; Si no hace falta fuel para viajar
     (:method fuel-lleno
       :precondition ()
       :tasks ()

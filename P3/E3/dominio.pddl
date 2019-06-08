@@ -22,7 +22,8 @@
     (in ?p - person ?a - aircraft)
     (different ?x - city ?y - city)
     (igual ?x - city ?y - city)
-    (falta-fuel ?a - aircraft)
+    (falta-fuel-rapido ?a - aircraft ?c1 - city ?c2 - city)
+    (falta-fuel-lento ?a - aircraft ?c1 - city ?c2 - city)
     (viaje-rapido-posible ?a - aircraft ?c1 - city ?c2 - city)
     (viaje-lento-posible ?a - aircraft ?c1 - city ?c2 - city)
   )
@@ -46,7 +47,9 @@
 
   (:derived (different ?x - city ?y - city) (not (= ?x ?y)))
 
-  (:derived (falta-fuel ?a - aircraft) (> (capacity ?a) (fuel ?a)))
+  (:derived (falta-fuel-rapido ?a - aircraft ?c1 - city ?c2 - city) (< (fuel ?a) (* (distance ?c1 ?c2) (fast-burn ?a))))
+
+  (:derived (falta-fuel-lento ?a - aircraft ?c1 - city ?c2 - city) (< (fuel ?a) (* (distance ?c1 ?c2) (slow-burn ?a))))
 
   (:derived (viaje-rapido-posible ?a - aircraft ?c1 - city ?c2 - city) (>= (fuel-limit) (+ (total-fuel-used) (* (distance ?c1 ?c2) (fast-burn ?a)))))
 
@@ -91,7 +94,7 @@
 
     ; Si no tiene el depósito lleno recarga
     (:method fuel-no-lleno
-      :precondition (falta-fuel ?a)
+      :precondition (or (and (viaje-lento-posible ?a ?c1 ?c2) (falta-fuel-lento ?a ?c1 ?c2)) (and (viaje-rapido-posible ?a ?c1 ?c2) (falta-fuel-rapido ?a ?c1 ?c2)))
       :tasks (refuel ?a ?c1)
     )
 
